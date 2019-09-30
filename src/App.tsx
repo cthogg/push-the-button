@@ -52,13 +52,13 @@ function App() {
         <h1 className="title">Click the Button for {challengeTime/1000} seconds</h1>
         <a className="button is-primary is-large" onClick={() => onClick(started)}> {buttonText} </a>
         </div>
-        </section>
-
-        <div className="container">
+        <div style={{marginTop: 15}} className="container">
         <h2 className={colorOfDiv} > You held it for {responseTime} ms </h2>
         <h2 className={colorOfDiv}> Off by {differenceOut} ms </h2>
 
       </div>
+      </section>
+
 </React.Fragment>
   );
 }
