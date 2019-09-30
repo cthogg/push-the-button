@@ -40,26 +40,47 @@ function App() {
       setButtonText(START_STRING);
     }
   };
-  
+
   const responseTime = endDate.diff(startDate);
-  const differenceOut = Math.abs(challengeTime - responseTime) 
-  const isDifferenceLargerThanTime = differenceOut < 200? true : false
-  const colorOfDiv = isDifferenceLargerThanTime ? 'has-text-success' : 'has-text-danger'
+  const differenceOut = Math.abs(challengeTime - responseTime);
+  const isDifferenceLargerThanTime = differenceOut < 200 ? true : false;
+  const colorOfDiv = isDifferenceLargerThanTime
+    ? "has-text-success"
+    : "has-text-danger";
   return (
-    <React.Fragment> 
-    <section className="section">
-      <div className="container">
-        <h1 className="title">Click the Button for {challengeTime/1000} seconds</h1>
-        <a className="button is-primary is-large" onClick={() => onClick(started)}> {buttonText} </a>
+    <React.Fragment>
+      <section className="section">
+        <div className="container">
+          <h1 className="title">
+            Click the Button for {challengeTime / 1000} seconds
+          </h1>
+          <a
+            className="button is-primary is-large"
+            onClick={() => onClick(started)}
+          >
+            {" "}
+            {buttonText}{" "}
+          </a>
         </div>
-        <div style={{marginTop: 15}} className="container">
-        <h2 className={colorOfDiv} > You held it for {responseTime} ms </h2>
-        <h2 className={colorOfDiv}> Off by {differenceOut} ms </h2>
-
-      </div>
+        <div style={{ marginTop: 15 }} className="container">
+          <h2 className={colorOfDiv}> You held it for {responseTime} ms </h2>
+          <h2 className={colorOfDiv}> Off by {differenceOut} ms </h2>
+        </div>
       </section>
-
-</React.Fragment>
+      <div style={{
+  position: 'absolute',
+  bottom: 0,
+  right: 20,
+  width: '100%',
+  height: '2.5rem'
+}}>
+        <div className=" has-text-right">
+          <p>
+            <a href="https://github.com/cthogg/push-the-button">Source Code</a>
+          </p>
+        </div>
+      </div>
+    </React.Fragment>
   );
 }
 
