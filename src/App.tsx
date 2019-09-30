@@ -1,6 +1,5 @@
 import React from "react";
-import "react-awesome-button/dist/styles.css";
-import "./App.css";
+import "./index.scss";
 import moment from "moment";
 
 function msToTime(duration: number) {
@@ -16,8 +15,8 @@ function msToTime(duration: number) {
   return newHours + ":" + newMinutes + ":" + newSeconds + "." + milliseconds;
 }
 
-const START_STRING = 'START'
-const STOP_STRING ='STOP!'
+const START_STRING = "START";
+const STOP_STRING = "STOP!";
 
 function App() {
   console.log(moment.locale());
@@ -26,35 +25,41 @@ function App() {
   const [startDate, setStartDate] = React.useState(moment());
   const [endDate, setEndDate] = React.useState(moment());
   const [started, setStarted] = React.useState(true);
-  const [buttonText, setButtonText] =  React.useState(START_STRING);
+  const [buttonText, setButtonText] = React.useState(START_STRING);
+  const [challengeTime, setChallengeTime] = React.useState(1000);
+
   const onClick = (started: boolean) => {
     if (started) {
       setStartDate(moment());
       setStarted(!started);
-      setButtonText(STOP_STRING)
+      setButtonText(STOP_STRING);
     }
     if (!started) {
       setEndDate(moment());
       setStarted(!started);
-      setButtonText(START_STRING)
-
+      setButtonText(START_STRING);
     }
   };
-  const difference = endDate.diff(startDate);
-  const diffInSeconds = moment.utc(difference).format("ss:ms");
-
+  
+  const responseTime = endDate.diff(startDate);
+  const differenceOut = Math.abs(challengeTime - responseTime) 
+  const isDifferenceLargerThanTime = differenceOut < 200? true : false
+  const colorOfDiv = isDifferenceLargerThanTime ? 'has-text-success' : 'has-text-danger'
   return (
-    <div>
-      <h1>Click the Button</h1>
-      <button onClick={() => setStartDate(moment())}> SET DATE </button>
-      <button onClick={() => setEndDate(moment())}> END DATE </button>
-      <button onClick={() => onClick(started)}> {buttonText} </button>
+    <React.Fragment> 
+    <section className="section">
+      <div className="container">
+        <h1 className="title">Click the Button for {challengeTime/1000} seconds</h1>
+        <a className="button is-primary is-large" onClick={() => onClick(started)}> {buttonText} </a>
+        </div>
+        </section>
 
-      <h2>It is {startDate.valueOf()} </h2>
+        <div className="container">
+        <h2 className={colorOfDiv} > You held it for {responseTime} ms </h2>
+        <h2 className={colorOfDiv}> Off by {differenceOut} ms </h2>
 
-      <h2>It is {endDate.valueOf()} </h2>
-      <h2> Difference is {endDate.diff(startDate)} </h2>
-    </div>
+      </div>
+</React.Fragment>
   );
 }
 
