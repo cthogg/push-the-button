@@ -2,6 +2,7 @@ import React from "react";
 import "./index.scss";
 import moment from "moment";
 import Loader from "react-loader-spinner";
+import Fireworks from "./Fireworks";
 
 const START_STRING = "START";
 const STOP_STRING = "STOP!";
@@ -44,7 +45,7 @@ function App() {
   const responseTime = endDate.diff(startDate);
   const differenceOut = Math.abs(challengeTime - responseTime);
   const GRACE_TIME = 200;
-  const isDifferenceLargerThanTime = differenceOut < GRACE_TIME ? true : false;
+  const isDifferenceLargerThanTime = differenceOut > GRACE_TIME ? true : false;
   const isResponseNegative = responseTime <= 0;
   const colorOfDiv = colorOfDivFunc(
     isDifferenceLargerThanTime,
@@ -85,6 +86,7 @@ function App() {
           </h2>
           <h2 className={colorOfDiv}> Off by {differenceOut} ms </h2>
           <Loader type={'Hearts'} color={'hsl(141, 53%, 53%)'} className={loaderClass} > </Loader>
+          <Fireworks/>
         </div>
       </section>
       <div
