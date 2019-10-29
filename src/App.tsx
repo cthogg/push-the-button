@@ -40,19 +40,28 @@ function App() {
       setButtonText(START_STRING);
     }
   };
-
+  const colorOfDivFunc = (isDifferenceLargerThanTime: boolean, isResponseNegative: boolean) => {
+    if(isResponseNegative){
+      return 'is-hidden'
+    }
+    
+    if(isDifferenceLargerThanTime){
+      return "has-text-danger"
+    }
+    return "has-text-success"
+  }
   const responseTime = endDate.diff(startDate);
   const differenceOut = Math.abs(challengeTime - responseTime);
-  const isDifferenceLargerThanTime = differenceOut < 200 ? true : false;
-  const colorOfDiv = isDifferenceLargerThanTime
-    ? "has-text-success"
-    : "has-text-danger";
+  const GRACE_TIME = 200
+  const isDifferenceLargerThanTime = differenceOut < GRACE_TIME ? true : false;
+  const isResponseNegative = responseTime <=0
+  const colorOfDiv = colorOfDivFunc(isDifferenceLargerThanTime, isResponseNegative )
   return (
     <React.Fragment>
       <section className="section">
         <div className="container">
           <h1 className="title">
-            Click the Button for {challengeTime / 1000} seconds
+            Click the Button for {challengeTime / 1000} second
           </h1>
           <a
             className="button is-primary is-large"
@@ -63,7 +72,7 @@ function App() {
           </a>
         </div>
         <div style={{ marginTop: 15 }} className="container">
-          <h2 className={colorOfDiv}> You held it for {responseTime} ms </h2>
+          <h2 className={colorOfDiv}> You held it for {moment.duration(responseTime,'ms').asMilliseconds()} ms </h2>
           <h2 className={colorOfDiv}> Off by {differenceOut} ms </h2>
         </div>
       </section>

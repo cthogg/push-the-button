@@ -10,3 +10,5 @@ https://codepen.io/katrpilar/pen/PxjqYK
 1. Add a share icon
 1. Add funny sounds to it.
 1. Add an online suggestions board.
+1. move button to the right of the screen
+1. add animations
