@@ -45,12 +45,31 @@ function App() {
   const responseTime = endDate.diff(startDate);
   const differenceOut = Math.abs(challengeTime - responseTime);
   const GRACE_TIME = 200;
+  const GRACE_TIME_SMALL = 100;
+
   const isDifferenceLargerThanTime = differenceOut > GRACE_TIME ? true : false;
+  const isDifferenceLargerThanSmallTime = differenceOut > GRACE_TIME_SMALL ? true : false;
+
   const isResponseNegative = responseTime <= 0;
   const colorOfDiv = colorOfDivFunc(
     isDifferenceLargerThanTime,
     isResponseNegative
   );
+
+  const areFireWorksShownFunc = (
+    isDifferenceLargerThanSmallTime: boolean,
+    isResponseNegative: boolean
+  ) => {
+    if (isResponseNegative) {
+      return "is-hidden";
+    }
+
+    if (isDifferenceLargerThanSmallTime) {
+      return "is-hidden";
+    }
+    return "";
+  };
+  const areFireWorksShown = areFireWorksShownFunc(isDifferenceLargerThanSmallTime, isResponseNegative)
   const isLoaderShown =  (
     isResponseNegative: boolean,
     buttonCLickedAtLeastOnce: boolean
@@ -86,7 +105,7 @@ function App() {
           </h2>
           <h2 className={colorOfDiv}> Off by {differenceOut} ms </h2>
           <Loader type={'Hearts'} color={'hsl(141, 53%, 53%)'} className={loaderClass} > </Loader>
-          <Fireworks/>
+          <Fireworks  custClass={areFireWorksShown}/>
         </div>
       </section>
       <div

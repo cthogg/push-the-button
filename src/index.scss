@@ -1,9 +1,7 @@
 @import "node_modules/bulmaswatch/darkly/bulmaswatch";
 
-body{
-    background-color: 'black'
-}
-
+// FIXME: put fireworks css in separate file.
+// https://codepen.io/yshlin/pen/ylDEk
 $particles: 50;
 $width: 500;
 $height: 500;

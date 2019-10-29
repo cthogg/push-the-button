@@ -1,12 +1,16 @@
 import React from "react";
 import "./index.scss";
-function Fireworks(): JSX.Element {
-  
+
+interface FireworksProps {
+    custClass: string
+}
+
+const Fireworks: React.FC<FireworksProps>  = ({custClass}: FireworksProps) => {
   return (
-      <React.Fragment> 
+      <span className={custClass}> 
     <div className="pyro">
     <div className="before"></div>
-    <div className="after"></div> </div></React.Fragment>
+    <div className="after"></div> </div></span>
   );
 }
 
