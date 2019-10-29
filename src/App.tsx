@@ -2,24 +2,11 @@ import React from "react";
 import "./index.scss";
 import moment from "moment";
 import Loader from "react-loader-spinner";
-function msToTime(duration: number) {
-  const milliseconds = (duration % 1000) / 100;
-  const seconds = Math.floor((duration / 1000) % 60);
-  const minutes = Math.floor((duration / (1000 * 60)) % 60);
-  const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-  const newHours = hours < 10 ? "0" + hours : hours;
-  const newMinutes = minutes < 10 ? "0" + minutes : minutes;
-  const newSeconds = seconds < 10 ? "0" + seconds : seconds;
-
-  return newHours + ":" + newMinutes + ":" + newSeconds + "." + milliseconds;
-}
 
 const START_STRING = "START";
 const STOP_STRING = "STOP!";
 
 function App() {
-  console.log(moment.locale());
   let now = moment().format("LLLL");
 
   const [startDate, setStartDate] = React.useState(moment());
@@ -27,8 +14,9 @@ function App() {
   const [started, setStarted] = React.useState(true);
   const [buttonText, setButtonText] = React.useState(START_STRING);
   const [challengeTime, setChallengeTime] = React.useState(1000);
-
+  const [buttonCLickedAtLeastOnce, setButtonClickedAtLeastONce] = React.useState(false)
   const onClick = (started: boolean) => {
+    setButtonClickedAtLeastONce(true)
     if (started) {
       setStartDate(moment());
       setStarted(!started);
@@ -63,16 +51,17 @@ function App() {
     isResponseNegative
   );
   const isLoaderShown =  (
-    isResponseNegative: boolean
+    isResponseNegative: boolean,
+    buttonCLickedAtLeastOnce: boolean
   ) => {
-    if (isResponseNegative) {
+    if (isResponseNegative && buttonCLickedAtLeastOnce) {
       return "is-primary"
     }
     else{
       return "is-hidden"
     }
   };
-  const loaderClass = isLoaderShown(isResponseNegative)
+  const loaderClass = isLoaderShown(isResponseNegative, buttonCLickedAtLeastOnce)
   return (
     <React.Fragment>
       <section className="section">
