@@ -3,6 +3,7 @@ import "./index.scss";
 import moment from "moment";
 import Loader from "react-loader-spinner";
 import Fireworks from "./Fireworks";
+import Fish from "./Fish";
 
 const START_STRING = "START";
 const STOP_STRING = "STOP!";
@@ -69,6 +70,7 @@ function App() {
     }
     return "";
   };
+
   const areFireWorksShown = areFireWorksShownFunc(isDifferenceLargerThanSmallTime, isResponseNegative)
   const isLoaderShown =  (
     isResponseNegative: boolean,
@@ -105,6 +107,7 @@ function App() {
           </h2>
           <h2 className={colorOfDiv}> Off by {differenceOut} ms </h2>
           <Loader type={'Hearts'} color={'hsl(141, 53%, 53%)'} className={loaderClass} > </Loader>
+          <Fish> </Fish>
           <Fireworks  custClass={areFireWorksShown}/>
         </div>
       </section>

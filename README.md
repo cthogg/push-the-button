@@ -1,6 +1,10 @@
 
 # README
 https://buttonbash.netlify.com/
+
+Fish animaiton from https://codepen.io/jonitrythall/pen/bivaG
+Fireworks animation // https://codepen.io/yshlin/pen/ylDEk
+
 ## Roadmap
 1. Make it go start, sotp reset because it is confusing otherwise. 
 1. Make fireworks go for one second. 
