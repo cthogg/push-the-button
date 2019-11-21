@@ -87,7 +87,7 @@ function App() {
       <section className="section">
         <div className="container">
           <h1 className="title">
-            Click the Button for {challengeTime / 1000} second
+            Stop the timer after {challengeTime / 1000} second
           </h1>
           <a
             className="button is-primary is-large"
