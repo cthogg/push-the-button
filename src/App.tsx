@@ -44,12 +44,13 @@ function App() {
     return "has-text-success";
   };
   const responseTime = endDate.diff(startDate);
-  const differenceOut = Math.abs(challengeTime - responseTime);
+  const differenceOut =  Math.abs(challengeTime - responseTime);
   const GRACE_TIME = 200;
   const GRACE_TIME_SMALL = 100;
 
-  const isDifferenceLargerThanTime = differenceOut > GRACE_TIME ? true : false;
-  const isDifferenceLargerThanSmallTime = differenceOut > GRACE_TIME_SMALL ? true : false;
+  const isDifferenceLargerThanTime = differenceOut > GRACE_TIME  ? true : false;
+  const isDifferenceZero = differenceOut === 0  
+  const isDifferenceLargerThanSmallTime = differenceOut > GRACE_TIME_SMALL
 
   const isResponseNegative = responseTime <= 0;
   const colorOfDiv = colorOfDivFunc(
@@ -57,10 +58,13 @@ function App() {
     isResponseNegative
   );
 
-  const areFireWorksShownFunc = (
+  const isNearlyThereShownFunc = (
     isDifferenceLargerThanSmallTime: boolean,
-    isResponseNegative: boolean
+    isResponseNegative: boolean, isDifferenceZero: boolean
   ) => {
+    if(isDifferenceZero){
+      return "is-hidden"
+    }
     if (isResponseNegative) {
       return "is-hidden";
     }
@@ -68,10 +72,20 @@ function App() {
     if (isDifferenceLargerThanSmallTime) {
       return "is-hidden";
     }
-    return "";
+    return "subtitle";
   };
 
-  const areFireWorksShown = areFireWorksShownFunc(isDifferenceLargerThanSmallTime, isResponseNegative)
+  const isDifferenceZeroCelebrationShown = (
+    isDifferenceZero: boolean,
+  ) => {
+    if (isDifferenceZero) {
+      return "";
+    }
+    return "is-hidden";
+  };
+
+  const areFireWorksShown = isDifferenceZeroCelebrationShown(isDifferenceZero)
+  const isNearlyThereShown =  isNearlyThereShownFunc(isDifferenceLargerThanSmallTime, isResponseNegative, isDifferenceZero)
   const isLoaderShown =  (
     isResponseNegative: boolean,
     buttonCLickedAtLeastOnce: boolean
@@ -106,8 +120,10 @@ function App() {
             {moment.duration(responseTime, "ms").asMilliseconds()} ms{" "}
           </h2>
           <h2 className={colorOfDiv}> Off by {differenceOut} ms </h2>
-          <Loader type={'Hearts'} color={'hsl(141, 53%, 53%)'} className={loaderClass} > </Loader>
-          <Fish> </Fish>
+          <Loader       height={500}
+         width={500} type={'Watch'} color={'hsl(141, 53%, 53%)'} className={loaderClass} > </Loader>
+          <h2 className={isNearlyThereShown}> NEARLY THERE </h2>
+          <Fish  custClass={isNearlyThereShown}> </Fish>
           <Fireworks  custClass={areFireWorksShown}/>
         </div>
       </section>
