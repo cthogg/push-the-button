@@ -16,3 +16,6 @@ Fireworks animation // https://codepen.io/yshlin/pen/ylDEk
 1. Add an online suggestions board.
 1. move button to the right of the screen (not needed)
 1. add animations Done
+1. Add nearly there and not fireworks when you get nearly there. 
+1. Add maybe only one firework when not the 
+1. Change text to "stop the timer after one second" or maybe even five seconds.
