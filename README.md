@@ -6,6 +6,7 @@ Fish animaiton from https://codepen.io/jonitrythall/pen/bivaG
 Fireworks animation // https://codepen.io/yshlin/pen/ylDEk
 
 ## Roadmap
+1. Debug: it does not look like it is responding how it shou, maybe due to the complex animations.
 1. Add a leaderboard
 1. Add a share icon to whatsapp and facebook
 
