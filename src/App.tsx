@@ -100,7 +100,7 @@ function App() {
   const loaderClass = isLoaderShown(isResponseNegative, buttonCLickedAtLeastOnce)
   return (
     <React.Fragment>
-      <section className="section">
+      <section style={{overflow:'hidden'}} className="section">
         <div className="container">
           <h1 className="title">
             Stop the timer after {challengeTime / 1000} second
